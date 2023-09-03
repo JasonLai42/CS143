@@ -1,0 +1,66 @@
+
+SELECT id, givenName, familyName, gender, orgName, dob, city, country FROM Laureate WHERE id=?
+
+id: Laureate
+givenName: { en: Laureate }
+familyName: { en: Laureate }
+gender: Laureate
+birth: {
+    date: Laureate
+    place: {
+        city: { en: Laureate }
+        country: { en: Laureate }
+    }
+}
+
+SELECT awardYear, category, sortOrder, portion, dateAwarded, prizeStatus, motivation, prizeAmount FROM Awarded WHERE id=?
+SELECT affiliationName, city, country FROM Affiliation WHERE id=? AND awardYear=? AND category=?
+
+nobelPrizes: [{
+    awardYear: Awarded
+    category: { en: Awarded }
+    sortOrder: Awarded
+    portion: Awarded
+    dateAwarded: Awarded
+    prizeStatus: Awarded
+    motivation: { en: Awarded }
+    prizeAmount: Awarded
+    affiliations: [{
+        name: { en: Affiliations }
+        city: { en: Affiliations }
+        country: { en: Affiliations }
+    }]
+}]
+
+
+================================================================================================================================================================================
+
+SELECT id, givenName, familyName, gender, orgName, dob, city, country FROM Laureate WHERE id=?
+
+id: 
+orgName: { en: }
+founded: {
+    date: 
+    place: {
+        city: { en: }
+        country: { en: }
+    }
+}
+
+
+
+nobelPrizes: [{
+    awardYear:
+    category: { en: }
+    sortOrder:
+    portion:
+    dateAwarded:
+    prizeStatus:
+    motivation: { en: }
+    prizeAmount: 
+    affiliations: [{
+        name: { en: }
+        city: { en: }
+        country: { en: }
+    }]
+}]

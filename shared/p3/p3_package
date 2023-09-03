@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+ZIP_FILE=project3.zip
+REQUIRED_FILES="convert.sh load.sql q1.sql q2.sql q3.sql q4.sql q5.sql laureate.php"
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+#error function
+function error_exit()
+{
+   echo -e "ERROR: $1" 1>&2
+   exit 1
+}
+
+# make sure running in container
+if [ `whoami` != "cs143" ]; then
+    error_exit "You need to run this script within the container"
+fi
+
+# change to the directory where the script is located
+cd ${DIR}
+
+# check file existence
+if [ -f ${ZIP_FILE} ]; then
+    rm -f ${ZIP_FILE}
+fi
+
+# check the existence of the required files
+for FILE in ${REQUIRED_FILES}
+do
+    if [ ! -f ${FILE} ]; then
+        echo "ERROR: Cannot find ${FILE} in ${DIR}" 1>&2
+        exit 1
+    fi
+done
+
+echo "zip ${ZIP_FILE} -x p3_package p3_test \*.json \*.del @ -r ."
+zip ${ZIP_FILE} -x p3_package p3_test \\*.json \\*.del @ -r .
+if [ $? -ne 0 ]; then
+    error_exit "Create ${ZIP_FILE} failed, check for error messages in console."
+fi
+
+echo "[SUCCESS] Created '$DIR/${ZIP_FILE}'"
+
+exit 0
